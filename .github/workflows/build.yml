@@ -1,0 +1,29 @@
+name: Build Native .so
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r26d
+
+      - name: Build
+        run: |
+          cd jni
+          $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libanimalcompanysickassmenu
+          path: libs/arm64-v8a/libanimalcompanysickassmenu.so
