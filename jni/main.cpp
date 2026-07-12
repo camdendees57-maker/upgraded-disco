@@ -6,9 +6,9 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <EGL/egl.h>
-#include <dlfcn.h>                    // <-- Added this line
+#include <dlfcn.h>
 
-#define IMGUI_IMPL_OPENGL_ES2
+#define IMGUI_IMPL_OPENGL_ES2          // ← MUST be before any ImGui includes
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_android.h"
@@ -67,7 +67,6 @@ void loadTokenFile() {
     std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
     file.close();
 
-    // Parse token
     size_t pos = content.find("\"token\":");
     if (pos != std::string::npos) {
         size_t start = content.find("\"", pos + 8) + 1;
@@ -75,7 +74,6 @@ void loadTokenFile() {
         nakamaToken = content.substr(start, end - start);
     }
 
-    // Parse refresh_token
     pos = content.find("\"refresh_token\":");
     if (pos != std::string::npos) {
         size_t start = content.find("\"", pos + 16) + 1;
@@ -96,10 +94,6 @@ void RenderMenu() {
     ImGui::Begin("SickAssMenu | Animal Company");
 
     ImGui::Text("Token Status: %s", nakamaToken.empty() ? "Not Loaded" : "Loaded");
-
-    if (!nakamaToken.empty()) {
-        ImGui::TextWrapped("Token + Refresh Token ready for Nakama.");
-    }
 
     ImGui::Separator();
 
