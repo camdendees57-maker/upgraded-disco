@@ -6,6 +6,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <EGL/egl.h>
+#include <dlfcn.h>                    // <-- Added this line
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_android.h"
