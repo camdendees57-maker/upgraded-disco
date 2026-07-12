@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <EGL/egl.h>
 #include <dlfcn.h>                    // <-- Added this line
+#define IMGUI_IMPL_OPENGL_ES2
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_android.h"
