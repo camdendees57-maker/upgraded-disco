@@ -1,0 +1,6 @@
+*.o
+*.so
+libs/
+obj/
+*.apk
+.DS_Store
